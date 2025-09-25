@@ -428,3 +428,4 @@ This looks scary but it's just a "plug-and-play" problem.
     2.  Do the algebra to solve for the "new" temperature ($u_i^{t+\Delta t}$).
     3.  The final formula will tell you how to find the temperature at a node using its current value and its neighbors' current values. Just follow the math, don't worry about the physics.
 
+test123
