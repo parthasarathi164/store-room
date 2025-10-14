@@ -1,40 +1,46 @@
 ## Wind Tunnel Experiment (Velocity vs RPM) (lab exp1)
 
-### Pitot-Static Tube Velocity Formula Derivation
+### Derivation of the Velocity Formula (Alcohol Manometer)
 
-Total pressure at pitot tube: $p_0$
+#### Governing Equations
 
-Static pressure at static port: $p_\infty$
+The derivation uses two primary equations:
 
-Dynamic pressure: $q = p_0 - p_\infty = \frac{1}{2} \rho V^2$
+* **Bernoulli's Equation:** $P_1 + \frac{1}{2}\rho v_1^2 = P_2 + \frac{1}{2}\rho v_2^2$
+    * **$P$**: Static pressure of the fluid (Pascals, Pa).
+    * **$\rho$**: Density of the flowing fluid, which is air (kg/m³).
+    * **$v$**: Velocity of the air (m/s).
+    * **Subscripts 1 and 2**: Refer to the upstream settling chamber and the test section, respectively.
 
-Rearrange for velocity $V$:
+* **Continuity Equation:** $A_1 v_1 = A_2 v_2$
+    * **$A$**: Cross-sectional area of the tunnel (m²).
+
+#### Velocity Derivation
+
+Combining the two equations and solving for the test section velocity ($v_2$, or simply $v$) gives:
 $$
-V = \sqrt{\frac{2(p_0 - p_\infty)}{\rho}}
-$$
-
-Manometer measures height difference $\Delta h$ (in mm):
-
-Pressure difference: $p_0 - p_\infty = \rho_{m} g\, \Delta h / 1000$
-
-Manometric fluid density: $\rho_m$
-
-So,
-$$
-V = \sqrt{ \frac{2\, \rho_{m} g\, \Delta h / 1000}{\rho} }
+v^2 = \frac{2(P_1 - P_2)}{\rho \left(1 - \left(\frac{A_2}{A_1}\right)^2\right)}
 $$
 
-For area correction:
+#### Manometer Pressure
+
+The pressure difference is measured with an alcohol manometer.
 $$
-V = \sqrt{ \frac{2\, \rho_{m} g\, \Delta h / 1000}{\rho \left[ 1 - \left( \frac{A_s}{A_t} \right)^2 \right] } }
+P_1 - P_2 = \frac{\rho_{alc} g (\Delta h)}{1000}
+$$
+* **$\rho_{alc}$**: Density of the manometer fluid, which is alcohol (kg/m³).
+* **$g$**: Acceleration due to gravity (m/s²).
+* **$\Delta h$**: Height difference in the manometer (millimeters, mm).
+* The **1000** converts $\Delta h$ from millimeters to meters.
+
+#### Final Formula
+
+Substituting the manometer pressure into the velocity equation yields the final formula:
+$$
+v = \sqrt{\frac{2 \cdot \frac{\rho_{alc} g (\Delta h)}{1000}}{\rho \left(1 - \left(\frac{A_2}{A_1}\right)^2\right)}}
 $$
 
-Or, as a simplified coefficient:
-$$
-V = 3.78 \sqrt{ \Delta h } \text{ (if density and units are standard) }
-$$
-
-### Steps
+#### Steps to perform experiment
 
 1. Start starter motor (30 rpm).
 2. Start main motor, ramp to first rpm (100 rpm).
