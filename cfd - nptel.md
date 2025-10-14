@@ -32,7 +32,7 @@
 ---
 ## Stream Function and Velocity Components
 
-For two-dimensional incompressible flow, the velocity components \(u\) and \(v\) can be expressed using the stream function \(\psi(x,y)\) as:
+For two-dimensional incompressible flow, the velocity components \(u\) and \(v\) can be expressed using the stream function $(\psi(x,y))$ as:
 
 $$
 u = \frac{\partial \psi}{\partial y}
@@ -58,11 +58,11 @@ $$
 | Pathline    | Trajectory followed by a single fluid particle over time                                                     |
 | Timeline    | Line formed by fluid particles marked simultaneously at an instant, tracked over time                         |
 
-| Coincidence Cases                                                    |
-|----------------------------------------------------------------------|
-| Streamline = Streakline = Pathline = Timeline in steady flow         |
-| Streamline and Timeline coincide since both are instant snapshots    |
-| Streakline and Pathline coincide for continuous particle injection   |
+| Coincidence Cases                                                  |
+| ------------------------------------------------------------------ |
+| Streamline = Streakline = Pathline = Timeline in steady flow       |
+| Streamline and Timeline coincide since both are instant snapshots  |
+| Streakline and Pathline coincide for continuous particle injection |
 
 ---
 

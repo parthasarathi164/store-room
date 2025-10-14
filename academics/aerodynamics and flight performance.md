@@ -88,3 +88,4 @@ $$
 5. Repeat for each rpm: 100, 200, 300, 400, 500.
 6. Calculate $V$ for each rpm using the above formula.
 7. Plot $V$ vs rpm and check for linearity.
+
