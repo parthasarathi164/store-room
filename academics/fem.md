@@ -1,10 +1,57 @@
+## von misses stress
+
+Von Mises stress is a scalar value computed from the full 3D stress tensor, used to predict yielding (plastic deformation) of ductile materials under complex loading. It is based on the maximum distortion energy theory. While simple tensile yield (like stretching a rod) considers only one direction, real-world loads are multiaxial—acting in several directions at once. The von Mises yield criterion states:
+
+- A material begins to yield when its von Mises stress $\sigma_v$ exceeds the yield strength observed in a uniaxial tension test ($S_y$).
+
+Mathematically, for principal stresses $\sigma_1, \sigma_2, \sigma_3$:
+
+$$
+\sigma_v = \sqrt{\frac{1}{2}\left[(\sigma_1 - \sigma_2)^2 + (\sigma_2 - \sigma_3)^2 + (\sigma_3 - \sigma_1)^2\right]}
+$$
+
+The von Mises stress lets engineers compare a complex loading situation to a simple tension scenario. If $\sigma_v \geq S_y$, yielding is expected. This is why engineers use von Mises stress in FEA (finite element analysis): it simplifies complex stress states into a single value for easy safety checks.
+
+## viva questions
+
+1. what is difference between FEM and FEA?
+
+| Aspect     | FEM (Finite Element Method)                          | FEA (Finite Element Analysis)                                           |
+| ---------- | ---------------------------------------------------- | ----------------------------------------------------------------------- |
+| Definition | Mathematical technique for solving physical problems | Practical application of FEM, usually via software simulation           |
+| Role       | Provides the theoretical framework and equations     | Uses FEM to model, solve, and interpret real-world engineering problems |
+| Output     | System of algebraic equations                        | Results like displacements, stresses, temperature, etc.                 |
+| Usage      | Basis for analytical and numerical studies           | Used by engineers for design, validation, and optimization              |
+| Tools      | Mathematical derivation                              | Simulation software (ANSYS, Abaqus, etc.)                               |
+
+2. steps of FEM.
+
+- Step 1: Discretization of the structure
+- Step 2: Selection of a proper interpolation or displacement model
+- Step 3: Derivation of element stiffness matrices and load vectors
+- Step 4: Assemblage of element equations to obtain the overall equilibrium equations
+- Step 5: Solution for the unknown nodal displacements
+- Step 6: Computation of element strains and stresses.
+
+3. steps of FEA.
+
+- Preprocessing: Define geometry, material properties, and boundary conditions; generate the mesh
+- Solution: Assemble and solve the system equations for nodal values (e.g., displacements).
+- Postprocessing: Calculate derived quantities (e.g., strains, stresses) and interpret results.
+
+4. define isotropic and anisotropic.
+
+Isotropic means a material has the same properties in all directions (direction-independent). Example: Glass.​
+
+Anisotropic means a material's properties vary depending on the direction (direction-dependent). Example: Wood.​
+
+5. what is stiffness?
+
+Stiffness is the measure of a material or structure's resistance to deformation when a force is applied. It shows how much force is needed for a certain displacement. $k = \frac{F}{\delta}$
+
 ## what is ansys APDL?
 
 Ansys APDL (Ansys [Parametric Design Language](https://www.google.com/search?sca_esv=650ecf1b08cfc5b0&sxsrf=AE3TifNymkUK21TBhXyU6623WFM8kSLszg%3A1760239994039&q=Parametric+Design+Language&sa=X&sqi=2&ved=2ahUKEwiHv8H83J2QAxXnSGcHHddqB18QxccNegQILBAB&mstk=AUtExfBiYewJvJfyf51YjoD6_p6INbJUR2W7n_X2_9ZmorHCiJGUnPH7nL0azQsZtwumpy9-jS5IEJPb-6S44gHd6OFXs6THYe9ymUOs-kSOkCmbHooxbcTiOJ9xKyawUzY1IGDm9XXdbGqk9tZFGHv8Pc5zF0fd69KTmgWXRFPbYyVGDhHNvtdNxNTkt13cw4v7hVN_XvsvFghW2Pjcg_DSix7NfHQ_Z_pSPwzsdneH0Nh8iD6WSydyMDBK-H4wVAvExLC64kjxO0xJI-lKN-pdmy8k&csui=3)) is ==a scripting language used to control and automate the Ansys Mechanical finite element analysis (FEA) solver==. It enables users to define geometries, set solver parameters, customize workflows, and develop custom applications, providing deeper access to the software's capabilities beyond the standard graphical user interface (GUI). APDL is utilized for parametric design, batch processing, and fine-tuning complex simulations.
-
-**importance**
-- we use this in our FEM lab.
-- 
 
 ## 1D Bar Element Stiffness Matrix (Natural Coordinates)
 
@@ -227,3 +274,175 @@ $$
 
 ---
 
+## Lab exp (2a)
+
+### 1. Given Data
+
+- Lengths: $L_1 = 100 \ \text{mm}, \ L_2 = 200 \ \text{mm}$
+- Young's Modulus: $E = 2 \times 10^5 \ \text{MPa}$
+- Cross-section Areas: $A_1 = 400 \ \text{mm}^2$, $A_2 = 200 \ \text{mm}^2$
+- Load applied: $P = -1000 \ \text{N}$ (compression, on node 3)
+- Poisson’s Ratio: $\mu = 0.3$
+- Nodes: $u_1$ (fixed, $0$ mm), $u_2$ (junction), $u_3$ (loaded end)
+
+---
+
+### 2. Element Stiffness Matrices
+
+For a 1D bar element:
+$$
+k^{(e)} = \frac{EA}{L}
+\begin{bmatrix}
+1 & -1 \\
+-1 & 1
+\end{bmatrix}
+$$
+
+- Element 1:
+  $$
+  k_1 = \frac{2 \times 10^5 \times 400}{100} = 800000 \ \text{N/mm}
+  $$
+
+- Element 2:
+  $$
+  k_2 = \frac{2 \times 10^5 \times 200}{200} = 200000 \ \text{N/mm}
+  $$
+
+---
+
+### 3. Global Stiffness Matrix Assembly
+
+$$
+K =
+\begin{bmatrix}
+800000 & -800000 & 0 \\
+-800000 & 1000000 & -200000 \\
+0 & -200000 & 200000 \\
+\end{bmatrix}
+$$
+
+Force vector:
+$$
+F =
+\begin{bmatrix}
+0 \\
+0 \\
+-1000
+\end{bmatrix}
+$$
+
+Apply boundary condition: $u_1 = 0$
+
+---
+
+### 4. Reduced System for $u_2$, $u_3$
+
+Remove first row/col:
+
+$$
+\begin{bmatrix}
+1000000 & -200000 \\
+-200000 & 200000 \\
+\end{bmatrix}
+\begin{bmatrix}
+u_2 \\
+u_3 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+-1000
+\end{bmatrix}
+$$
+
+First equation: $1000000 u_2 - 200000 u_3 = 0$
+
+Second equation: $-200000 u_2 + 200000 u_3 = -1000$
+
+---
+
+### 5. Solve Displacements
+
+From first: $1000000 u_2 = 200000 u_3 \rightarrow u_3 = 5u_2$
+
+Plug into second:
+$$
+-200000 u_2 + 200000 (5u_2) = -1000 \\
+-200000 u_2 + 1000000 u_2 = -1000 \\
+800000 u_2 = -1000 \\
+u_2 = -0.00125 \ \text{mm} \\
+u_3 = 5u_2 = -0.00625 \ \text{mm}
+$$
+
+So,
+- $u_1 = 0 \ \text{mm}$
+- $u_2 = -0.00125 \ \text{mm}$
+- $u_3 = -0.00625 \ \text{mm}$
+
+---
+
+### 6. Strain Calculation in Each Element
+
+For element $i$ ($m$ and $n$ are nodes):
+
+$$
+\epsilon^{(i)} = B^{(i)} u \\
+B^{(i)} = 
+\begin{bmatrix}
+-\frac{1}{L_i} & \frac{1}{L_i}
+\end{bmatrix}
+$$
+
+#### Element 1 (Nodes 1–2, $L_1 = 100$ mm):
+
+$$
+B^{(1)} = [-0.01, \ 0.01]
+$$
+$$
+\epsilon^{(1)} = -0.01 \cdot 0 + 0.01 \cdot (-0.00125) = -0.0000125
+$$
+
+#### Element 2 (Nodes 2–3, $L_2 = 200$ mm):
+
+$$
+B^{(2)} = [-0.005, \ 0.005]
+$$
+$$
+\epsilon^{(2)} = -0.005 \cdot (-0.00125) + 0.005 \cdot (-0.00625)
+$$
+$$
+= 0.00000625 + (-0.00003125) = -0.000025
+$$
+
+---
+
+### 7. Stress Calculation in Each Element
+
+$$
+\sigma = E \cdot \epsilon
+$$
+
+#### Element 1:
+$$
+\sigma^{(1)} = 2 \times 10^5 \times (-0.0000125) = -2.5 \ \text{MPa}
+$$
+
+#### Element 2:
+$$
+\sigma^{(2)} = 2 \times 10^5 \times (-0.000025) = -5 \ \text{MPa}
+$$
+
+---
+
+### 8. Results Table
+
+| Node | Displacement (mm) |
+|------|-------------------|
+|  1   |      $0$          |
+|  2   | $-0.00125$        |
+|  3   | $-0.00625$        |
+
+| Element | Strain     | Stress (MPa) |
+|---------|------------|--------------|
+|   1     | $-0.0000125$ |   $-2.5$   |
+|   2     | $-0.000025$  |   $-5$     |
