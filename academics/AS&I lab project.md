@@ -12,6 +12,34 @@ Now I'll create a comprehensive guide for this aircraft systems instrumentation 
 
 You'll build a microcontroller-based turn coordinator that computes **roll rate** from IMU sensor data and displays **turn coordination graphically** using an OLED display. This mimics the aircraft turn coordinator instrument that shows both rate of turn and slip/skid indication.[^1][^2][^3]
 
+### about turn and roll rate
+
+#### Turn Rate
+- What it is: How fast the aircraft’s heading changes (rate of turn around the vertical axis).  
+- Formula:  
+  $$
+  \text{Turn rate} = \frac{g \cdot \tan(\phi)}{V}
+  $$
+  where $\phi$ = bank angle, and $V$ = true airspeed.  
+- Cockpit indication: Shown on the Turn Coordinator or Turn-and-Slip Indicator — marked as “Standard Rate Turn (2°/s)” (a full 360° in 2 minutes).  
+
+---
+
+#### Roll Rate
+- What it is: How fast the aircraft rolls about its longitudinal axis (banks left or right).  
+- Formula:  
+  $$
+  p = \frac{d\phi}{dt}
+  $$
+  where $\phi$ = bank angle (roll angle).  
+- Cockpit indication: Displayed on the Attitude Indicator (AI) or Primary Flight Display (PFD) as the rate at which the horizon bar tilts; also measured by the roll-rate gyro (symbol $p$).  
+
+---
+
+👉 In short:  
+- Turn rate ($r$) → how fast heading changes.  
+- Roll rate ($p$) → how fast wings tilt.
+
 ## Hardware Requirements
 
 **Essential Components:**
@@ -24,6 +52,14 @@ You'll build a microcontroller-based turn coordinator that computes **roll rate*
 
 **Why MPU6050?**
 ==The MPU6050 combines a 3-axis gyroscope (measures angular rates) and 3-axis accelerometer (measures linear acceleration) in one package, making it ideal for orientation sensing. It communicates via I2C, simplifying the interface with STM32.[^8][^9][^4]==
+
+**about the MPU sensor**
+- **Accelerometer:** Detects acceleration by measuring the displacement of a tiny mass inside the sensor due to external forces or gravity, altering capacitance in its MEMS structure.
+- **Gyroscope:** Measures angular velocity using the Coriolis effect, where vibrating elements in the MEMS structure get deflected if the sensor rotates, indicating rotational speed.
+
+>NOTE
+>
+>**Coriolis Effect:** It is the apparent deflection of a moving object when observed in a rotating frame; in MEMS gyros, this causes vibrating masses to shift when the sensor rotates, producing a measurable signal.
 
 ## Step-by-Step Implementation
 
