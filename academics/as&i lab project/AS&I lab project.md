@@ -1,6 +1,6 @@
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
-# Turn \& Bank Indicator: Microcontroller based computation of roll rate and displays turn coordination graphically.
+# Statement: Turn \& Bank Indicator: Microcontroller based computation of roll rate and displays turn coordination graphically.
 
 **my question**: how do i proceed. this is my aircraft systems and instrumentation lab project. i have to use stm32 nucleo board. give me all the steps to achieve the above output properly.
 
@@ -12,34 +12,7 @@ Now I'll create a comprehensive guide for this aircraft systems instrumentation 
 
 You'll build a microcontroller-based turn coordinator that computes **roll rate** from IMU sensor data and displays **turn coordination graphically** using an OLED display. This mimics the aircraft turn coordinator instrument that shows both rate of turn and slip/skid indication.[^1][^2][^3]
 
-### about turn and roll rate
-
-#### Turn Rate
-- What it is: How fast the aircraft’s heading changes (rate of turn around the vertical axis).  
-- Formula:  
-  $$
-  \text{Turn rate} = \frac{g \cdot \tan(\phi)}{V}
-  $$
-  where $\phi$ = bank angle, and $V$ = true airspeed.  
-- Cockpit indication: Shown on the Turn Coordinator or Turn-and-Slip Indicator — marked as “Standard Rate Turn (2°/s)” (a full 360° in 2 minutes).  
-
----
-
-#### Roll Rate
-- What it is: How fast the aircraft rolls about its longitudinal axis (banks left or right).  
-- Formula:  
-  $$
-  p = \frac{d\phi}{dt}
-  $$
-  where $\phi$ = bank angle (roll angle).  
-- Cockpit indication: Displayed on the Attitude Indicator (AI) or Primary Flight Display (PFD) as the rate at which the horizon bar tilts; also measured by the roll-rate gyro (symbol $p$).  
-
----
-
-👉 In short:  
-- Turn rate ($r$) → how fast heading changes.  
-- Roll rate ($p$) → how fast wings tilt.
-
+![[about AI and TC]]
 ## Hardware Requirements
 
 **Essential Components:**
