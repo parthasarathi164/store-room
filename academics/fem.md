@@ -35,7 +35,7 @@ The von Mises stress lets engineers compare a complex loading situation to a sim
 
 3. steps of FEA.
 
-- Preprocessing: Define geometry, material properties, and boundary conditions; generate the mesh
+- Preprocessing: Define geometry, material properties, and boundary conditions; generate the mesh.
 - Solution: Assemble and solve the system equations for nodal values (e.g., displacements).
 - Postprocessing: Calculate derived quantities (e.g., strains, stresses) and interpret results.
 

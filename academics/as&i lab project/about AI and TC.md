@@ -25,10 +25,10 @@ $$
 $$
 
 - If the ball is centered → **coordinated turn**  
-- Ball to inside → **slip**  
+- Ball to inside → **slip**
 - Ball to outside → **skid**
 
-Output to pilot:  
+Output to pilot:
 → Turn direction and coordination (turn rate, slip/skid)
 
 ---
