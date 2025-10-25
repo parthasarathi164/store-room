@@ -57,5 +57,3 @@ Outputs to pilot:
 | ---------------------- | ------------------------ | --------------------------------------------------------- | ------------------------------------------------- |
 | **Attitude Indicator** | Mechanical gyro horizon  | Electronic EADI with pitch/bank ladder & trends           | Center of PFD; synthetic horizon line             |
 | **Turn Coordinator**   | Gyro + inclinometer ball | Graphical slip/skid (ball/triangle) + heading rate vector | Bottom of attitude display; yaw damper automation |
-
----

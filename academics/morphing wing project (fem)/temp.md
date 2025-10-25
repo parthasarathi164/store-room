@@ -2,11 +2,11 @@
 
 Conventional wings are a compromise. They are designed with a fixed shape that performs *acceptably* across takeoff, cruise, and landing — but no single shape is optimal for all phases.  
 
-Morphing wings, on the other hand, can **adapt their geometry in real time**, altering *camber*, *twist*, and *surface area* to improve lift or reduce drag depending on the situation.  
+Morphing wings, on the other hand, can **adapt their geometry in real time**, altering *camber*, *twist*, and *surface area* to improve lift or reduce drag depending on the situation.
 
 This means:
-- Higher lift during takeoff and landing for shorter runways and safer operation.  
-- Lower drag during cruise to save fuel and increase range.  
+- Higher lift during takeoff and landing for shorter runways and safer operation.
+- Lower drag during cruise to save fuel and increase range.
 - Quieter operation, since morphing eliminates gaps and turbulence caused by flaps and slats.
 
 ---
