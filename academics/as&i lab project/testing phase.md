@@ -25,7 +25,6 @@
 2. **High-Speed Render Loop:** An entirely separate `requestAnimationFrame` loop runs as fast as your monitor can (usually 60+ times per second). Its only job is to re-draw the entire display.
     
 3. **Canvas Drawing:** Each time the render loop runs, it clears the screen and calls functions like `drawAttitudeIndicator()` and `drawAirspeedTape()`. These functions read the latest numbers from the "fake sensor" and draw the tapes, lines, and numbers onto the HTML canvas.
-    
 
 #### How to Use This with a Real STM32 & MPU6050
 
@@ -56,3 +55,17 @@
 2. **The STM32 Shouts Numbers Over USB:** The STM32's job is to package these clean numbers into a simple text message (like `"P:10.5, R:-3.2\n"`) and send it over the USB cable to the computer, over and over, 30 times a second.
     
 3. **The Webpage Listens for the "Shouts":** You modify this webpage's JavaScript code. You _delete_ the "Fake Data" Robot and replace it with a "Listener." This "Listener" pays attention to the computer's USB port. When that text message arrives from the STM32, the Listener grabs it, updates the numbers, and the "High-Speed Artist" (which is still running) automatically draws the display using these _real_ numbers.
+---
+### how to do this with the hardware
+
+1. **STM32 (CubeIDE):** Your C code **reads** the 6-axis sensor, **filters** the raw gyro/accel data into stable `pitch` and `roll` angles, and **prints** them as a simple text string over the USB (as a UART/COM port), ending with a newline (e.g., `"P:10.5,R:-3.2\n"`).
+    
+2. **HTML (Browser):** You click "Connect," and the JavaScript uses the **Web Serial API** to find and listen to your board's COM port.
+    
+3. **PFD (The Link):** The JavaScript **parses** the incoming text strings, updates the `sensorData` numbers, and the existing canvas-drawing loop automatically re-draws the PFD to match, showing real-time movement.
+---
+
+>NOTE (*date: 25-10-2025*)
+>- **original project Statement**: Turn \& Bank Indicator: Microcontroller based computation of roll rate and displays turn coordination graphically.
+>- this is just a testing phase, just to check the GUI. the above mentioned features will be updated in the future phases.
+
