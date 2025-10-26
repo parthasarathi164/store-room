@@ -1,4 +1,6 @@
-## von misses stress
+## some important things
+
+### von misses stress
 
 Von Mises stress is a scalar value computed from the full 3D stress tensor, used to predict yielding (plastic deformation) of ductile materials under complex loading. It is based on the maximum distortion energy theory. While simple tensile yield (like stretching a rod) considers only one direction, real-world loads are multiaxial—acting in several directions at once. The von Mises yield criterion states:
 
@@ -12,7 +14,7 @@ $$
 
 The von Mises stress lets engineers compare a complex loading situation to a simple tension scenario. If $\sigma_v \geq S_y$, yielding is expected. This is why engineers use von Mises stress in FEA (finite element analysis): it simplifies complex stress states into a single value for easy safety checks.
 
-## viva questions
+### viva questions
 
 1. what is difference between FEM and FEA?
 
@@ -49,7 +51,7 @@ Anisotropic means a material's properties vary depending on the direction (direc
 
 Stiffness is the measure of a material or structure's resistance to deformation when a force is applied. It shows how much force is needed for a certain displacement. $k = \frac{F}{\delta}$
 
-## what is ansys APDL?
+### what is ansys APDL?
 
 Ansys APDL (Ansys [Parametric Design Language](https://www.google.com/search?sca_esv=650ecf1b08cfc5b0&sxsrf=AE3TifNymkUK21TBhXyU6623WFM8kSLszg%3A1760239994039&q=Parametric+Design+Language&sa=X&sqi=2&ved=2ahUKEwiHv8H83J2QAxXnSGcHHddqB18QxccNegQILBAB&mstk=AUtExfBiYewJvJfyf51YjoD6_p6INbJUR2W7n_X2_9ZmorHCiJGUnPH7nL0azQsZtwumpy9-jS5IEJPb-6S44gHd6OFXs6THYe9ymUOs-kSOkCmbHooxbcTiOJ9xKyawUzY1IGDm9XXdbGqk9tZFGHv8Pc5zF0fd69KTmgWXRFPbYyVGDhHNvtdNxNTkt13cw4v7hVN_XvsvFghW2Pjcg_DSix7NfHQ_Z_pSPwzsdneH0Nh8iD6WSydyMDBK-H4wVAvExLC64kjxO0xJI-lKN-pdmy8k&csui=3)) is ==a scripting language used to control and automate the Ansys Mechanical finite element analysis (FEA) solver==. It enables users to define geometries, set solver parameters, customize workflows, and develop custom applications, providing deeper access to the software's capabilities beyond the standard graphical user interface (GUI). APDL is utilized for parametric design, batch processing, and fine-tuning complex simulations.
 

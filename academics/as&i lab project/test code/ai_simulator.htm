@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aircraft Primary Flight Display</title>
+    <title>Aircraft Primary Flight Display (Simulated)</title>
     <!-- 1. Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
     <!-- 2. Load a good "tech" font (Orbitron) from Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,6 @@
             background-color: #000;
             border-radius: 8px;
             border: 2px solid #333;
-            /* --- FIX: Make canvas fill its parent container --- */
             width: 100%;
             height: 100%;
             display: block;
@@ -30,13 +29,13 @@
 </head>
 <body class="bg-gray-900 flex flex-col items-center justify-center min-h-screen p-4">
 
-    <h1 class="text-2xl font-bold text-cyan-300 mb-4">AI Primary Flight Display (PFD)</h1>
+    <h1 class="text-2xl font-bold text-cyan-300 mb-4">AI Primary Flight Display (SIMULATED)</h1>
 
     <!-- 4. The Canvas element where we will draw the PFD --><div class="w-full max-w-5xl aspect-[16/10] shadow-2xl">
         <canvas id="pfdCanvas"></canvas>
     </div>
 
-    <p class="mt-4 text-gray-400">Simulating fake MPU6050 sensor data stream.</p>
+    <!-- 5. Reverted to old status message --><p class="mt-4 text-gray-400">Simulating fake MPU6050 sensor data stream.</p>
 
     <script>
         // === SCRIPT START ===
@@ -45,17 +44,18 @@
         const canvas = document.getElementById('pfdCanvas');
         const ctx = canvas.getContext('2d');
 
-        // --- 2. FAKE SENSOR DATA ---
-        // This object holds the "live" data from our fake sensors
+        // --- 2. SENSOR DATA (Simulated) ---
+        // This object holds the "live" data from our fake sensor
         const sensorData = {
             pitch: 0,       // Degrees
             roll: 0,        // Degrees
+            rollRate: 0,    // Degrees per second
             airspeed: 120,  // Knots
             altitude: 10000, // Feet
             heading: 360,     // Degrees
             verticalSpeed: 0 // Feet per minute
         };
-
+        
         // This object controls the *change* in our fake data
         const sim = {
             pitchRate: 0,
@@ -71,6 +71,7 @@
         };
 
         // --- 3. RESIZE AND INITIALIZE ---
+        // (This function is unchanged)
         function resizeCanvas() {
             // Make canvas sharp on all displays
             const dpr = window.devicePixelRatio || 1;
@@ -85,11 +86,11 @@
             canvas.style.width = `${rect.width}px`;
             canvas.style.height = `${rect.height}px`;
         }
-
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas(); // Initial call
 
-        // --- 4. SIMULATION LOGIC ---
+        // --- 4. FAKE SENSOR DATA SIMULATOR ---
+        
         // This function updates the fake sensor data periodically
         function updateFakeData() {
             // Simple noise function (Perlin-like)
@@ -111,6 +112,11 @@
 
             sensorData.roll += sim.rollRate * 0.1; // 0.1 is just a time delta factor
             sensorData.pitch += sim.pitchRate * 0.1;
+            
+            // --- NEW: Set the rollRate data
+            // We'll set this to the 'sim.rollRate' which is the *change* in roll
+            // Multiplied by a factor to make it look like "degrees per second"
+            sensorData.rollRate = sim.rollRate * 5; 
 
             // Clamp pitch and roll
             sensorData.pitch = Math.max(-90, Math.min(90, sensorData.pitch));
@@ -140,6 +146,7 @@
         // Start the sensor simulation
         setInterval(updateFakeData, 33); // ~30x per second
 
+
         // --- 5. MAIN DRAWING LOOP ---
         function drawPFD() {
             // Get logical width/height from styled properties
@@ -158,12 +165,14 @@
             drawAltitudeTape(w, h);
             drawHeadingIndicator(w, h);
             drawVerticalSpeedIndicator(w, h);
+            drawRollRateIndicator(w, h); // This will now show the fake roll rate
             
             // Request the next frame
             requestAnimationFrame(drawPFD);
         }
 
         // --- 6. COMPONENT DRAWING FUNCTIONS ---
+        // (These are all unchanged from the previous version)
 
         function drawAttitudeIndicator(w, h) {
             const { pitch, roll } = sensorData;
@@ -341,8 +350,6 @@
             ctx.lineWidth = 2;
 
             const pixelsPerKnot = 8;
-            // Removed currentOffset as it wasn't directly used for drawing the tape numbers
-            // const currentOffset = (airspeed % 10) * pixelsPerKnot; 
 
             for (let speed = Math.floor(airspeed - 50); speed <= Math.ceil(airspeed + 50); speed++) {
                 if (speed < 0) continue;
@@ -638,9 +645,43 @@
 
             ctx.restore();
         }
+        
+        // --- 7. NEW: ROLL RATE INDICATOR ---
+        function drawRollRateIndicator(w, h) {
+            const { rollRate } = sensorData;
+            
+            // Position it in the top-right, near the roll indicator
+            const x = w / 2 + 120; 
+            const y = h / 2 - 150;
+            const boxWidth = 90;
+            const boxHeight = 45;
+
+            ctx.save();
+            
+            // Box
+            ctx.fillStyle = '#000';
+            ctx.strokeStyle = '#FFF'; // White border to distinguish from primary readouts
+            ctx.lineWidth = 2;
+            ctx.fillRect(x, y, boxWidth, boxHeight);
+            ctx.strokeRect(x, y, boxWidth, boxHeight);
+
+            // Readout Text (Number)
+            ctx.fillStyle = '#0F0'; // Green
+            ctx.font = '20px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(rollRate.toFixed(1), x + boxWidth / 2, y + boxHeight / 2 - 8); // Number adjusted up
+
+            // Add "Deg/s" unit below
+            ctx.font = '10px Orbitron';
+            ctx.fillStyle = '#FFF';
+            ctx.fillText('Deg/s', x + boxWidth / 2, y + boxHeight / 2 + 12); // Unit adjusted down
+            
+            ctx.restore();
+        }
 
 
-        // --- 7. START THE RENDER LOOP ---
+        // --- 8. START THE RENDER LOOP ---
         requestAnimationFrame(drawPFD);
 
         // === SCRIPT END ===

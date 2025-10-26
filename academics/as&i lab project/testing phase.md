@@ -1,20 +1,19 @@
-
-
 ### with html (using gemini)
 
-![[random-repo/academics/as&i lab project/images/AI display parts.png]]
+![[AI parts.png]]
 `above fig: attitude Indicator made by gemini using html and JavaScript`
 
 #### what are the parts of the image
 
-| Component              | Description                                                      | Unit                | Display Location |
-| ---------------------- | ---------------------------------------------------------------- | ------------------- | ---------------- |
-| **Attitude Indicator** | Shows aircraft pitch (nose up/down) and roll (wings left/right). | Degrees             | Center           |
-| **Airspeed Indicator** | Shows speed of the aircraft through the air.                     | Knots (KTS)         | Left Tape        |
-| **Altimeter**          | Shows aircraft height above sea level.                           | Feet (FT)           | Right Tape       |
-| **Heading Indicator**  | Shows the direction the aircraft's nose is pointing.             | Degrees (HDG)       | Bottom Tape      |
-| **Vertical Speed**     | Shows rate of climb or descent.                                  | Feet / Minute (V/S) | Far Right Column |
-| **Roll Indicator**     | Digital and analog display of the precise roll angle.            | Degrees (ROLL)      | Top Center       |
+| Component              | Description                                                      | Unit                | Display Location               |
+| ---------------------- | ---------------------------------------------------------------- | ------------------- | ------------------------------ |
+| **Attitude Indicator** | Shows aircraft pitch (nose up/down) and roll (wings left/right). | Degrees             | Center                         |
+| **Airspeed Indicator** | Shows speed of the aircraft through the air.                     | Knots (KTS)         | Left Tape                      |
+| **Altimeter**          | Shows aircraft height above sea level.                           | Feet (FT)           | Right Tape                     |
+| **Heading Indicator**  | Shows the direction the aircraft's nose is pointing.             | Degrees (HDG)       | Bottom Tape                    |
+| **Vertical Speed**     | Shows rate of climb or descent.                                  | Feet / Minute (V/S) | Far Right Column               |
+| **Roll Indicator**     | Digital and analog display of the precise roll angle.            | Degrees (ROLL)      | Top Center                     |
+| **Roll Rate**          | Shows instantaneous roll rate of the aircraft.                   | Deg/s               | To the right of roll indicator |
 
 ---
 ### technical explanation of how this display works

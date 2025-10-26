@@ -1,6 +1,6 @@
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
-# Statement: Turn \& Bank Indicator: Microcontroller based computation of roll rate and displays turn coordination graphically.
+# Statement: Turn & Bank Indicator: Microcontroller based computation of roll rate and displays turn coordination graphically.
 
 **my question**: how do i proceed. this is my aircraft systems and instrumentation lab project. i have to use stm32 nucleo board. give me all the steps to achieve the above output properly.
 
@@ -12,7 +12,10 @@ Now I'll create a comprehensive guide for this aircraft systems instrumentation 
 
 You'll build a microcontroller-based turn coordinator that computes **roll rate** from IMU sensor data and displays **turn coordination graphically** using an OLED display. This mimics the aircraft turn coordinator instrument that shows both rate of turn and slip/skid indication.[^1][^2][^3]
 
+## about AI and TC
+
 ![[about AI and TC]]
+
 ## Hardware Requirements
 
 **Essential Components:**
@@ -31,9 +34,13 @@ You'll build a microcontroller-based turn coordinator that computes **roll rate*
 - **Gyroscope:** Measures angular velocity using the Coriolis effect, where vibrating elements in the MEMS structure get deflected if the sensor rotates, indicating rotational speed.
 
 >NOTE
->
 >**Coriolis Effect:** It is the apparent deflection of a moving object when observed in a rotating frame; in MEMS gyros, this causes vibrating masses to shift when the sensor rotates, producing a measurable signal.
+---
+## testing phase
 
+![[testing phase]]
+
+---
 ## Step-by-Step Implementation
 
 ### **Step 1: Hardware Connections**
