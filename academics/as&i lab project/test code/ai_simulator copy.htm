@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircraft Primary Flight Display (Simulated)</title>
+    <!-- 1. Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Load a good "tech" font (Orbitron) from Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 3. Apply the font and a dark theme */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #111;
+            color: #eee;
+        }
+        canvas {
+            background-color: #000;
+            border-radius: 8px;
+            border: 2px solid #333;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <h1 class="text-2xl font-bold text-cyan-300 mb-4">AI Primary Flight Display (SIMULATED)</h1>
+
+    <!-- 4. The Canvas element where we will draw the PFD --><div class="w-full max-w-5xl aspect-[16/10] shadow-2xl">
+        <canvas id="pfdCanvas"></canvas>
+    </div>
+
+    <!-- 5. Reverted to old status message --><p class="mt-4 text-gray-400">Simulating fake MPU6050 sensor data stream.</p>
+
+    <!-- Add this block to your existing HTML script section -->
+<script>
+async function connectSerialAndStream() {
+    if (!("serial" in navigator)) {
+        console.warn("Web Serial API not supported in this browser.");
+        return;
+    }
+
+    try {
+        // Ask user to select a serial port.
+        const port = await navigator.serial.requestPort();
+        // Adjust baud to match board (115200)
+        await port.open({ baudRate: 115200 });
+
+        const textDecoder = new TextDecoderStream();
+        const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+        const reader = textDecoder.readable.getReader();
+
+        // optional: show connected UI
+        console.log("Serial connected");
+
+        // continuously read lines
+        let buffer = "";
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buffer += value;
+            let nl;
+            while ((nl = buffer.indexOf('\n')) >= 0) {
+                const line = buffer.slice(0, nl).trim();
+                buffer = buffer.slice(nl + 1);
+                if (line.length === 0) continue;
+                try {
+                    // Expect JSON lines like: {"pitch":..,"roll":..,"rollRate":..,"heading":..}
+                    const obj = JSON.parse(line);
+                    if ('pitch' in obj) sensorData.pitch = Number(obj.pitch);
+                    if ('roll' in obj) sensorData.roll = Number(obj.roll);
+                    if ('rollRate' in obj) sensorData.rollRate = Number(obj.rollRate);
+                    if ('heading' in obj) sensorData.heading = Number(obj.heading);
+                    // leave other fields (altitude, airspeed, etc.) untouched as you requested
+                } catch (e) {
+                    console.warn("JSON parse error:", e, "line:", line);
+                }
+            }
+        }
+
+        // clean up if exiting
+        reader.releaseLock();
+        await readableStreamClosed.catch(()=>{});
+        await port.close();
+    } catch (err) {
+        console.error("Serial connection failed:", err);
+    }
+}
+
+// Auto-add a small connect button on the page so user can allow the serial port.
+(function addSerialButton() {
+    const btn = document.createElement('button');
+    btn.innerText = "Connect MPU (serial)";
+    btn.style.position = 'fixed';
+    btn.style.right = '12px';
+    btn.style.top = '12px';
+    btn.style.zIndex = 9999;
+    btn.onclick = async () => {
+        await connectSerialAndStream();
+        btn.style.display = 'none';
+    };
+    document.body.appendChild(btn);
+})();
+</script>
+</body>
+</html>
