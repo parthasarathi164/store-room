@@ -1,3 +1,0 @@
-### orbital mech and terminologies
-
-- 
