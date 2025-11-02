@@ -68,12 +68,13 @@
 >- **original project Statement**: Turn \& Bank Indicator: Microcontroller based computation of roll rate and displays turn coordination graphically.
 >- this is just a testing phase, just to check the GUI. the above mentioned features will be updated in the future phases.
 ---
+### what was the problem, and what was the solution
 
->NOTE (*date: 02-11-2025*)
->- fixed the mpu sensor issue, now it is working fine.
->- now going to connect it to the web serial api.
+You were getting the “MPU init failed” message because your STM32 was talking to the sensor over I²C, but the code was checking for the wrong device ID. The **WHO_AM_I** register (0x75) identifies the chip — genuine **MPU6050** sensors return **0x68**, but many clones or newer variants like the **ICM-20608** return **0x70** instead. Since your code only accepted **0x68**, it assumed the sensor wasn’t found even though communication was fine. After updating the code to accept both **0x68** and **0x70**, the STM32 correctly recognized and initialized the sensor, proving the issue was just a mismatched device ID check, not a wiring or I²C problem.
+
+>NOTE: *(date: 02-11-2025)*
+>after working on this problem for 3 days and trying various methods, including using AI and youtube videos, I finally found a solution.
 ---
-
 ### connecting the sensor data to the web display using web serial API
 
 #### Key Changes:
@@ -83,7 +84,7 @@
 3. **Modify `updateFakeData`:** We will _keep_ this function, but we'll _remove_ the parts that simulate `pitch`, `roll`, and `rollRate`. We'll let it continue simulating the other instruments (`airspeed`, `altitude`, etc.) so your display still looks complete.
 4. **Create a Read Loop:** This loop will listen for new data from the Nucleo, parse the JSON, and update the `sensorData` object.
 ---
-#### how i made it smoother
+#### how i made the display smoother
 
 The solution is to apply a **software filter** to smooth the data out. We can do this very easily, and the best place to do it is right in your `index.html` file. This way, you can tweak the "smoothness" just by changing one number and reloading the web page, without having to re-flash your Nucleo board.
 
