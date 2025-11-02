@@ -74,7 +74,7 @@
 >- now going to connect it to the web serial api.
 ---
 
-### connecting it to the web display
+### connecting the sensor data to the web display using web serial API
 
 #### Key Changes:
 
@@ -105,3 +105,12 @@ To tweak the smoothness:
 If it feels too smooth and laggy, open index.html and change const smoothingFactor = 0.1; to a slightly larger number, like 0.15 or 0.2.
 
 If it's still too jittery, change it to a smaller number, like 0.05.
+
+---
+#### why turn coordinator is not possible using a 6 axis sensor.
+
+To get a true, stable compass heading, you need a 3rd sensor: a **Magnetometer** (which would make it a 9-axis sensor).
+
+**Without a magnetometer, a 6-axis sensor CANNOT know its absolute compass heading.**
+
+---
