@@ -67,4 +67,41 @@
 >NOTE (*date: 25-10-2025*)
 >- **original project Statement**: Turn \& Bank Indicator: Microcontroller based computation of roll rate and displays turn coordination graphically.
 >- this is just a testing phase, just to check the GUI. the above mentioned features will be updated in the future phases.
+---
 
+>NOTE (*date: 02-11-2025*)
+>- fixed the mpu sensor issue, now it is working fine.
+>- now going to connect it to the web serial api.
+---
+
+### connecting it to the web display
+
+#### Key Changes:
+
+1. **Add a "Connect" Button:** The browser requires a user action (like a click) to connect to a serial port for security.
+2. **Add Web Serial API Logic:** We'll add functions to connect to the port and read the data.
+3. **Modify `updateFakeData`:** We will _keep_ this function, but we'll _remove_ the parts that simulate `pitch`, `roll`, and `rollRate`. We'll let it continue simulating the other instruments (`airspeed`, `altitude`, etc.) so your display still looks complete.
+4. **Create a Read Loop:** This loop will listen for new data from the Nucleo, parse the JSON, and update the `sensorData` object.
+---
+#### how i made it smoother
+
+The solution is to apply a **software filter** to smooth the data out. We can do this very easily, and the best place to do it is right in your `index.html` file. This way, you can tweak the "smoothness" just by changing one number and reloading the web page, without having to re-flash your Nucleo board.
+
+We will add a **Low-Pass Filter (LPF)**. It sounds complicated, but it's just one line of code. It works by mixing a small amount of the _new_, jittery data with a large amount of the _old_, already-smoothed data.
+
+Here is the updated `index.html` file.
+
+I've added the new smoothing logic and a `smoothingFactor` variable at the top of the `<script>` tag.
+
+**What to do now:**
+
+1. Use this new `index.html` file.
+2. Run your local web server (`python -m http.server`).
+3. Connect to your Nucleo board.
+4. The movement should now be **much smoother!**
+
+To tweak the smoothness:
+
+If it feels too smooth and laggy, open index.html and change const smoothingFactor = 0.1; to a slightly larger number, like 0.15 or 0.2.
+
+If it's still too jittery, change it to a smaller number, like 0.05.
