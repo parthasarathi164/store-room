@@ -1,12 +1,12 @@
 # Statement of Purpose: Telescopic Span-Wise Morphing Wing
 ## Team members
 
-| Name              | USN        |
-| ----------------- | ---------- |
-| Ajith P N         | 1RV23AS003 |
-| Rutuj Dugad Manoj | 1RV23AS014 |
-| Kiran V Airani    | 1RV23AS020 |
-| Yashwanth R       | 1RV23AS064 |
+| Name              | USN        | Signature |
+| ----------------- | ---------- | --------- |
+| Ajith P N         | 1RV23AS003 |           |
+| Rutuj Dugad Manoj | 1RV23AS014 |           |
+| Kiran V Airani    | 1RV23AS020 |           |
+| Yashwanth R       | 1RV23AS064 |           |
 
 ## Project Overview
 

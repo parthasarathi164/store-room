@@ -163,12 +163,12 @@ $$
 ---
 ## 2-Element Cantilever Bar FEM Solution (SI Units)
 
-**Given:**  
-- Bar length $L = 0.1\ \text{m}$  
-- Cross-section $A = 2 \times 10^{-4}\ \text{m}^2$  
-- Young's modulus $E = 2 \times 10^{11}\ \text{N/m}^2$  
+**Given:**
+- Bar length $L = 0.1\ \text{m}$
+- Cross-section $A = 2 \times 10^{-4}\ \text{m}^2$
+- Young's modulus $E = 2 \times 10^{11}\ \text{N/m}^2$
 - Fixed at $x = 0$; load $F = 1{,}000\ \text{N}$ at $x = 0.1\ \text{m}$  
-- Divide into 2 elements: $L_e = 0.05\ \text{m}$ each  
+- Divide into 2 elements: $L_e = 0.05\ \text{m}$ each
 
 ### 1. Stiffness Matrix for Each Element
 $$
@@ -451,3 +451,4 @@ $$
 
 ---
 
+test123
