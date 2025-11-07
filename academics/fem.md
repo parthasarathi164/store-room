@@ -450,5 +450,41 @@ $$
 |   2     | $-0.000025$  |   $-5$     |
 
 ---
+### for CIE 1
 
-test123
+#### steps in FEM
+
+- Step 1: Discretization of the structure
+- Step 2: Selection of a proper interpolation or displacement model
+- Step 3: Derivation of element stiffness matrices and load vectors
+- Step 4: Assemblage of element equations to obtain the overall equilibrium equations
+- Step 5: Solution for the unknown nodal displacements
+- Step 6: Computation of element strains and stresses.
+---
+#### Applications, advantages and limitations of fem
+
+Here is a summarized list of key applications of FEM based on the image:
+
+- Stress and thermal analysis for aerospace, automotive, and industrial parts.
+- Seismic analysis of infrastructure (dams, power plants, cities, buildings).
+- Crash analysis of vehicles and aircraft (including bird strike).
+- Fluid flow analysis of ponds, pollutants, and ventilation systems.
+- Electromagnetic analysis of antennas and electronic components.
+- Surgical procedure analysis (plastic surgery, jaw reconstruction, scoliosis treatment).
+- Aeroelastic analysis of bridges, towers, and aircraft components (flutter, gust, buffet, divergence).​
+
+**Advantages of FEM:**
+
+- Easily models irregular shapes.
+- Handles unlimited and varied boundary conditions.
+- No restriction for general or irregular loads.
+- Flexible for different materials in complex assemblies.
+- Easy and cost-effective to modify models.
+- Suitable for nonlinear behavior and large deformations.
+
+**Limitations of FEM:**
+
+- Handling material nonlinearity can be difficult.
+- Subdividing and preparing data is tedious.
+- Even simple problems may require significant computation and memory for accurate results.
+---
