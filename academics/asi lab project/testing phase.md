@@ -97,7 +97,7 @@ I've added the new smoothing logic and a `smoothingFactor` variable at the top o
 **What to do now:**
 
 1. Use this new `index.html` file.
-2. Run your local web server (`python -m http.server`).
+2. ==Run your local web server (`python -m http.server`).==
 3. Connect to your Nucleo board.
 4. The movement should now be **much smoother!**
 
