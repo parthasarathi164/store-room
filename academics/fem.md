@@ -571,3 +571,42 @@ w_2 \\
 - \frac{12 w_2}{L^3}
 + \frac{6 \theta_2}{L^2}
 $$
+
+Equivalent Nodal Force Vector for a Uniformly Distributed Load (UDL):
+$$
+\mathbf{f}^e =
+\begin{bmatrix}
+F_1 \\
+M_1 \\
+F_2 \\
+M_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+\displaystyle \frac{wL_e}{2} \\
+\displaystyle \frac{wL_e^2}{12} \\
+\displaystyle \frac{wL_e}{2} \\
+\displaystyle -\frac{wL_e^2}{12}
+\end{bmatrix}
+$$
+
+Neutral Axis:
+The neutral axis is the line in a beam’s cross-section where the material experiences zero longitudinal stress when the beam bends.
+
+Elastic Axis:
+The elastic axis is the line along a structure where applied loads cause bending without 
+causing twisting.
+
+Shear Center:
+The shear center is the point on a cross-section where a sideways (shear) force can be 
+applied without making the section twist.
+
+### Euler–Bernoulli Beam Theory – Standard Assumptions
+
+1. **Cross-sections that are plane before deformation remain plane after deformation.**
+2. **Cross-sections remain perpendicular to the neutral axis during bending** (i.e., shear deformation is neglected).
+3. **The material is linearly elastic, homogeneous, and isotropic.**
+4. **Deflections and rotations are small**, so geometric nonlinearities can be ignored.
+5. **The beam is slender**, meaning its length is much greater than its cross-sectional dimensions.
+6. **Normal stresses due to bending dominate**, and **transverse shear stresses are negligible**.
+7. **The modulus of elasticity (E) is constant** over the entire beam.

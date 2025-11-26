@@ -24,7 +24,7 @@ $$
 \dot{\psi} = \frac{g \tan\phi}{V}
 $$
 
-- If the ball is centered → **coordinated turn**  
+- If the ball is centered → **coordinated turn**
 - Ball to inside → **slip**
 - Ball to outside → **skid**
 
@@ -39,7 +39,7 @@ It shows **pitch** and **bank (roll)** angles of the aircraft.
 - Uses a **gyroscope** that stays fixed in space due to rigidity.
 - The aircraft moves around the gyro, and the **artificial horizon** moves accordingly.
 
-Outputs to pilot:  
+Outputs to pilot:
 - **Pitch angle ($\theta$)** → aircraft nose up/down
 - **Bank (roll) angle ($\phi$)** → wings level, left or right bank
 ---

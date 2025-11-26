@@ -15,6 +15,7 @@ You'll build a microcontroller-based turn coordinator that computes **roll rate*
 ## about AI and TC
 
 ![[about AI and TC]]
+this is the link to my final gui file --> ![[final_ai.htm]]
 
 ## Hardware Requirements
 
